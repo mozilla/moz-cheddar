@@ -29,7 +29,12 @@ pub fn rust_to_c(ty: &ast::Ty, assoc: &str) -> Result<Option<String>, Error> {
                 }
 
             Ok(Some(format!("{} {}", try_some!(anon_rust_to_c(ty)), assoc)))
-        }
+        },
+        ast::TyKind::Array(ref p_ty, ref p_expr) => {
+            let ty = p_ty.clone().unwrap();
+            let expr = p_expr.clone().unwrap();
+            Ok(Some(format!("{} {}[{}]", try_some!(anon_rust_to_c(&ty)), assoc, print::pprust::expr_to_string(&expr))))
+        },
         // All other types just have a name associated with them.
         _ => Ok(Some(format!("{} {}", try_some!(anon_rust_to_c(ty)), assoc))),
     }

@@ -13,8 +13,7 @@ before_script:
     - travis-cargo --only nightly install clippy
 script:
     - travis-cargo build
-    - ./on-nightly cargo clippy --lib
-    - ./on-nightly cargo clippy --bin cheddar
+    - ./on-nightly cargo clippy --all
     - travis-cargo test
     - travis-cargo --only stable doc
 env:

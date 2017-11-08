@@ -1,5 +1,11 @@
 # [master]
 
+# [0.4.2] - 2017-11-08
+
+## Fixed
+
+- Bump toml dependency version to 0.4.
+
 # [0.4.1] - 2017-04-11
 
 ## Fixed

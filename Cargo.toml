@@ -1,6 +1,6 @@
 [package]
 name = "moz-cheddar"
-version = "0.4.1"
+version = "0.4.2"
 authors = ["Sean Marshallsay <srm.1708@gmail.com>",
            "Matthew Gregan <kinetik@flim.org>"]
 

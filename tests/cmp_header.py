@@ -98,6 +98,12 @@ if len(funcs_not_found) > 0:
 
 # STRUCTS
 
+def get_array_size(s):
+    try:
+        return s["array_size"]
+    except KeyError:
+        return 0
+
 structs_not_found = copy.deepcopy(expected.classes)
 for (key, struct) in actual.classes.items():
     expected_struct = filter(lambda s: s["name"] == struct["name"], expected.classes.values())
@@ -112,8 +118,9 @@ for (key, struct) in actual.classes.items():
 
     expected_struct = expected_struct[0]
 
-    values = map(lambda s: { "name": s["name"], "type": s["type"] }, struct["properties"]["public"])
-    expected_values = map(lambda s: { "name": s["name"], "type": s["type"] }, expected_struct["properties"]["public"])
+    values = map(lambda s: { "name": s["name"], "type": s["type"], "array_size": get_array_size(s) }, struct["properties"]["public"])
+    expected_values = map(lambda s: { "name": s["name"], "type": s["type"], "array_size": get_array_size(s) }, expected_struct["properties"]["public"])
+    
     check(
         values == expected_values,
         "line {}: struct {!r} has incorrect members:\nexpected: {!r}\nfound: {!r}\n",

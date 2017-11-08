@@ -24,7 +24,8 @@ macro_rules! inner_cheddar_cmp_test {
                 .expect("internal testing error: unable to find current directory");
 
             // Compare the headers.
-            let output = Command::new(&cmp_script)
+            let output = Command::new("python")
+                .arg(&cmp_script)
                 .arg(&expected)
                 .arg(&actual)
                 .output()
@@ -193,6 +194,7 @@ cheddar_cmp_test! { compilable_structs,
         int32_t id;
         int32_t roll;
         double score;
+        int32_t grades[3];
     } Student;
     ",
     "
@@ -201,6 +203,7 @@ cheddar_cmp_test! { compilable_structs,
         id: i32,
         roll: i32,
         score: f64,
+        grades: [i32; 3]
     }
 
     // Shouldn't appear in the output header file.
